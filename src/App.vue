@@ -18,9 +18,9 @@
           <span class="icon icon-video-camera"></span>
           <p class="text">直播</p>
         </router-link>
-        <router-link to="/user" class="items">
+        <router-link to="/search" class="items">
           <span class="icon icon-spinner10"></span>
-          <p class="text">我的</p>
+          <p class="text">搜索</p>
         </router-link>
       </div>
     </div>

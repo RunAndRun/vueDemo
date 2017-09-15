@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('../fonts/icomoon.eot?o5bulj');
-  src:  url('../fonts/icomoon.eot?o5bulj#iefix') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf?o5bulj') format('truetype'),
-    url('../fonts/icomoon.woff?o5bulj') format('woff'),
-    url('../fonts/icomoon.svg?o5bulj#icomoon') format('svg');
+  src:  url('../fonts/icomoon.eot?l5hg5x');
+  src:  url('../fonts/icomoon.eot?l5hg5x#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?l5hg5x') format('truetype'),
+    url('../fonts/icomoon.woff?l5hg5x') format('woff'),
+    url('../fonts/icomoon.svg?l5hg5x#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,24 +24,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-video-camera:before {   /*直播*/
+.icon-video-camera:before {   /* 视频*/
   content: "\e914";
 }
-.icon-copy:before {         /*新闻*/
+.icon-copy:before {    /* 新闻*/
   content: "\e92c";
 }
-.icon-spinner10:before {   /*我的*/
+.icon-spinner10:before {  /* 我的*/
   content: "\e983";
 }
-.icon-eye:before {          /*可见*/
+.icon-search:before {   /* 搜索*/
+  content: "\e986";
+}
+.icon-eye:before {   /*可见*/
   content: "\e9ce";
 }
-.icon-eye-blocked:before {   /*不可见*/
+.icon-eye-blocked:before {  /* 不可见*/
   content: "\e9d1";
 }
-.icon-backward:before {     /*返回*/
-  content: "\ea1a";  
+.icon-cross:before {   /*返回2*/
+  content: "\ea0f";
 }
-.icon-insert-template:before {   /*推荐*/
+.icon-backward:before {   /* 返回*/
+  content: "\ea1a";
+}
+.icon-insert-template:before { /* 模版*/
   content: "\ea72";
 }

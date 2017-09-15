@@ -4,7 +4,7 @@ Vue.use(VueRouter)
 
 import news from "../components/news"
 import live from "../components/live"
-import user from "../components/user"
+import search from "../components/search"
 import recommend from "../components/recommend"
 
 import focusNews from "../components/channels/focusNews"
@@ -26,7 +26,7 @@ const newsChildrenRoutes=[    //新闻页 频道(子路由)
 
 const routes=[
   {path:"/",component:news,redirect:"/news"},
-  {path:"/user",component:user},
+  {path:"/search",component:search},
   {path:"/live",component:live},
   {path:"/news",component:news,children:newsChildrenRoutes},
   {path:"/recommend",component:recommend}
