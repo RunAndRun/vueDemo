@@ -1,9 +1,9 @@
 <template>
   <div class="search">
 	  <div class="searchBox">
-		  <span class="icon-search icon"></span>
+		  <span class="icon-search icon" v-tap="{methods:resultPage}"></span>
 		  <div class="searchInput">
-		  	<input type="text" placeholder="搜索感兴趣的内容" class="input" v-model="value" ref="input"/>
+		  	<input type="text" placeholder="搜索感兴趣的内容" class="input" v-model="value" ref="input" @input="search"/>
 		  	<span class="clear" v-show="value.length" v-tap="{methods:clear}">x</span>
 		  </div>
 		  <span class="icon-cross icon"></span>
@@ -41,13 +41,39 @@
     data(){
     	return{
     		value:"",
-    		newsItems:[]
+    		newsItems:[],
+    		focusItems:[]
     	}
     },
     methods:{
     	clear(){
     		this.value="";
     		this.$refs.input.blur();
+    		this.newsItems = this.focusItems;
+    	},
+    	search(){
+    		if(!this.value){
+    			this.newsItems = this.focusItems;
+    			return;
+    		}
+    		axios.get("/api",{
+    			params:{
+    				wd:this.value
+    			}
+    		}).then((res) => {
+    	    const re = /\[.+]/;
+    	    var data = res.data.match(re);  
+    	    //得到的是jsonp数据,正则匹配得到需要的数据字符串.
+    	    if(!data){
+    	    	return
+    	    }
+    	    this.newsItems = data[0].replace(/\[|]|"/g,"").split(",");
+    		});
+    	},
+    	resultPage(){
+        if(this.value){
+        	window.open("https://www.baidu.com/s?wd="+this.value,"_self")
+        }
     	}
     },
     updated(){
@@ -60,7 +86,8 @@
     },
     created(){
     	axios.get("/static/data/search.json").then((res) => {
-    		this.newsItems=res.data.focus;
+    		this.focusItems=res.data.focus;
+    		this.newsItems = this.focusItems;
     	})
     }
   }
