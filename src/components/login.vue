@@ -1,14 +1,11 @@
 <template>
-	<div class="loginpage" v-show="hide"> 
-	  <div class="back" v-tap="{methods:hidePage}">
-		  <span class="icon-backward"></span>
-	  </div>
-	  <h1 class="title">登录News</h1>
+	<div class="loginpage"> 
+	  <h1 class="title">Hot News</h1>
 	  <div class="loginBox">
-		  <input class="userName" type="text" placeholder="News账户手机/邮箱" v-model="userName" @blur="checkName">
+		  <input class="userName" type="text" placeholder="ID: 手机号/邮箱" v-model="userName" @blur="checkName">
 		  <div class="border_1px"></div>
 		  <div class="infoBox">
-		  	<input class="password word1" type="text"  maxlength="20" placeholder="请输入密码" v-model="password" @input="check">
+		  	<input class="password word1" type="text"  maxlength="20" placeholder="密码: 6~20位英文+数字" v-model="password" @input="check">
 			  <span :class="{'icon-eye-blocked':!visible,'icon-eye':visible}" class="icon" @click.prevent="togglePassWord"></span>
 		  </div>
 		  <div class="border_1px"></div>
@@ -17,9 +14,9 @@
       <span class="forget">忘记密码?</span>
       <span class="register">新用户注册</span>
 	  </div>
-	  <p class="loginBtn" v-tap="{methods:loginAccount}">登录</p>
+	  <p class="loginBtn" v-tap="{methods:loginAccount}" ref="btn">登录</p>
 	  <div class="otherLogin">
-	    <p class="text">其他登录方式</p>
+	    <p class="text">第三方暂不支持</p>
 	    <ul class="others">
 	      <li class="way"><span class="entry taobao">淘</span></li>
 	      <li class="way"><span class="entry sina">Sina</span></li>
@@ -43,9 +40,6 @@
 			}
 		},
 		methods:{
-			hidePage(){
-				this.$store.dispatch("hideLoginPage");
-			},
 			checkName(){
         const reEmail=/^\w+@[a-z0-9]+\.[a-z]+$/;
         const rePhone=/^1(3[0-9]|4[57]|5[0-35-9]|8[0-9]|7[780])\d{8}$/;
@@ -101,19 +95,29 @@
 				this.checkWord();  
 				if(this.checkuser&&this.checkPassWord){
           alert("登录成功");
+          this.upload(this.userName);
           this.userName="";
           this.password="";
           this.oldWord="";
           this.checkPassWord=false;
           this.checkuser=false;
-        	this.$store.dispatch("hideLoginPage");
+        	this.$router.push("/user");
 				}
+			},
+			upload(account){
+        this.$store.dispatch("upload",account);
 			}
 		},
-		computed:{
-      hide(){
-      	return this.$store.state.loginPage;
-      }
+		mounted(){
+			const btn = this.$refs.btn;
+			btn.addEventListener("touchstart",()=>{
+				btn.style.background="#a55705";
+				btn.style.fontWeight="700";
+			},false)
+			btn.addEventListener("touchend",()=>{
+				btn.style.background="#e0882b";
+				btn.style.fontWeight="400";
+			},false)
 		}
 	}
 </script>
@@ -128,17 +132,13 @@
 		height: 100%;
 		box-sizing:border-box;
 		background: #fff;
-		.back{
-			position:absolute;
-			padding:0.75rem;
-			left: 0;
-			top: 0;
-			font-size: 1.2rem;
-		}
 		.title{
-			padding:2.0rem 0;
+			padding:0.7rem 0 1.5rem 0;
 			font-size: 1.5rem;
 			font-weight: 700;
+			text-align: center;
+			animation: titlescale 2s;
+			color: #e0882b;
 		}
 		.loginBox{
 			font-size: 0.9rem;
@@ -227,4 +227,25 @@
 			}
 		}
 	}
+	@keyframes titlescale {
+  	0%{
+  		transform:scale(1,1);
+  		color: #fff;
+  		text-shadow: 0.25rem 0.25rem 0.25rem #fff;
+  	}
+  	25%{
+  		color: red;
+  		text-shadow: 0.25rem 0.25rem 0.25rem red;
+  	}
+  	50%{
+  		transform: scale(2.0,2.0);
+  		color: green;
+  		text-shadow: 0.25rem 0.25rem 0.25rem green;
+  	}
+  	100%{
+  		transition: scale(1,1);
+  		color: #000;
+  		text-shadow: 0.25rem 0.25rem 0.25rem #000;
+  	}
+  }
 </style>

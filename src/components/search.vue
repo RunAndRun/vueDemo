@@ -6,17 +6,9 @@
 		  	<input type="text" placeholder="搜索感兴趣的内容" class="input" v-model="value" ref="input" @input="search"/>
 		  	<span class="clear" v-show="value.length" v-tap="{methods:clear}">x</span>
 		  </div>
-		  <span class="icon-cross icon"></span>
 	  </div>
 	  <div class="wrapper" ref="wrapper">
       <div class="result">
-        <div class="history" style="display:none">
-	        <h3>历史搜索</h3>
-	        <span></span>
-	        <ul class="historyList">
-		        <li class="historyItem"></li>
-	        </ul>
-        </div>
         <h3 class="hotNews">今日热点</h3>
         <ul class="resultList">
 	        <li class="listItem" v-for="(item,index) in newsItems">
@@ -108,7 +100,8 @@
 			.icon{
 				flex: 0 1.5rem;
 				font-size:0.9rem;
-				line-height:1.0rem;			}
+				line-height:1.0rem;			
+			}
 			.searchInput{
 				flex: 1;
 				padding-right:2.5rem;

@@ -1,8 +1,6 @@
 <template>
   <div id="app">
     <router-view class="view"></router-view>
-    <select-channel class="index" v-show="channelsToggle"></select-channel>
-    <login class="index"></login>
     <div class="box">
       <div class="border_1px"></div>
       <div class="option">
@@ -10,41 +8,38 @@
           <span class="icon icon-copy"></span>
           <p class="text">新闻</p>
         </router-link>
-        <router-link to="/recommend" class="items">
+        <router-link to="/select" class="items">
           <span class="icon icon-insert-template"></span>
-          <p class="text">推荐</p>
-        </router-link>
-        <router-link to="/live" class="items">
-          <span class="icon icon-video-camera"></span>
-          <p class="text">直播</p>
+          <p class="text">频道</p>
         </router-link>
         <router-link to="/search" class="items">
-          <span class="icon icon-spinner10"></span>
+          <span class="icon icon-video-camera"></span>
           <p class="text">搜索</p>
         </router-link>
+        <a class="items" v-tap="{methods:user}">
+          <span class="icon icon-spinner10"></span>
+          <p class="text">我的</p>
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import selectChannel from "./components/selectChannel"
-  import login from "./components/login"
-
   export default {
     name: 'app',
-    data(){
-      return{
-        loginToggle:true
+    methods:{
+      user(){
+        if(this.account.length){
+          this.$router.push("/user");
+        }else{
+          this.$router.push("/login");
+        }
       }
     },
-    components:{
-      selectChannel,
-      login
-    },
     computed:{
-      channelsToggle(){
-        return this.$store.state.channelsPage
+      account(){
+        return this.$store.state.accounts;
       }
     }
   }
@@ -63,7 +58,7 @@
       width:100%;
       height:2.5rem;
       box-sizing:border-box;
-      background:#fff;
+      background:rgba(232,193,119,.7);
       .border_1px{
         position:absolute;
         left:0;
@@ -96,9 +91,6 @@
     .view{
       width:100%;
       height:100%;
-    }
-    .index{
-      z-index: 20;
     }
   }
 </style>

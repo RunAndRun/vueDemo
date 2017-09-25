@@ -27,17 +27,11 @@ var mutations = {
 			}
 		}
 	},
-	[types.SHOWCHANNELS](state){
-		state.channelsPage=true;
-	},
-	[types.HIDECHANNELS](state){
-		state.channelsPage=false;
-	},
-	[types.SHOWLOGIN](state){
-		state.loginPage=true;
-	},
-	[types.HIDELOGIN](state){
-		state.loginPage=false;
+	[types.ADD](state,account){
+		var data=state.accounts;
+		if(data.indexOf(account)===-1){
+			data.push(account)
+		}
 	}
 }
 

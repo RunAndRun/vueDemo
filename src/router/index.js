@@ -3,9 +3,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import news from "../components/news"
-import live from "../components/live"
+import user from "../components/user"
 import search from "../components/search"
-import recommend from "../components/recommend"
+import select from "../components/selectChannel"
+import start from "../components/start"
+import login from "../components/login"
 
 import focusNews from "../components/channels/focusNews"
 import vedio from "../components/channels/vedio"
@@ -25,11 +27,13 @@ const newsChildrenRoutes=[    //新闻页 频道(子路由)
 ]
 
 const routes=[
-  {path:"/",component:news,redirect:"/news"},
+  {path:"/",component:news,redirect:"/start"},
+  {path:"/start",component:start},
+  {path:"/login",component:login},
   {path:"/search",component:search},
-  {path:"/live",component:live},
+  {path:"/user",component:user},
   {path:"/news",component:news,children:newsChildrenRoutes},
-  {path:"/recommend",component:recommend}
+  {path:"/select",component:select}
 ]
 
 export default new VueRouter({

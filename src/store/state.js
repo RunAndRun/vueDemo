@@ -37,8 +37,7 @@ var state = {
 		  {type:1,path:"bbb",page:"厦门"}
 		]
   },
-  channelsPage:false,
-  loginPage:false
+  accounts:[]
 }
 
 export default state;

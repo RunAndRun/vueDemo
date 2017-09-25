@@ -1,7 +1,6 @@
 <template>
   <div class="selectChannel">
     <div class="head">
-      <span class="backIcon icon-backward" v-tap="{methods:hideChannel}"></span>
       <h2 class="headTxt">频道定制</h2>
       <div class="border_1px"></div>
     </div>
@@ -10,7 +9,6 @@
         <div class="selected">
           <h3 class="title">
             <span class="selectedChannel">已选频道</span>
-            <span class="explain">可点击/拖动还不行</span>
           </h3>
           <options :close="true" :items="defaultChannels"></options>
         </div>
@@ -70,23 +68,15 @@
           this.scroll.refresh();
         })
       }
-    },
-    methods:{
-      hideChannel(){
-        this.$store.dispatch("hideChannelsPage");
-      }
     }
   }
 </script>
 
 <style lang="scss">
   .selectChannel{
-    position: fixed;
+    position: relative;
     width: 100%;
-    height: 100%;
     background: #fff;
-    left: 0;
-    top: 0;
     .head{
       width: 100%;
       height: 2.25rem;
@@ -97,13 +87,6 @@
       box-sizing:border-box;
       background:#fff;
       color: #1b1d1f;
-      .backIcon{
-        position:absolute;
-        left: 0;
-        top: 0;
-        padding: 0.5rem 0.8rem;
-        font-size: 1.2rem;
-      }
       .headTxt{
         font-size: 0.9rem;
       }
@@ -117,7 +100,7 @@
       position:absolute;
       left: 0;
       top: 2.25rem;
-      bottom: 0;
+      bottom: 2.5rem;
       width: 100%;
       box-sizing:border-box;
       overflow: hidden;
@@ -131,11 +114,6 @@
               flex:1;
               text-align: left;
               color: #1b1d1f;
-            }
-            .explain{
-              flex:1;
-              text-align: right;
-              color:rgba(7,17,27,.5);
             }
           }
         }
