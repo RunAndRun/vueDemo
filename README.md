@@ -2,6 +2,10 @@
 
 > A Vue.js project
 
+vue2.0  vue-router  vuex  better-scroll  swiper  v-tap  css3动画
+
+适合vue学习中的同学.
+
 ## Build Setup
 
 ``` bash
