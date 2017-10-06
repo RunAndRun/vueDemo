@@ -46,10 +46,7 @@
     		new BScroll(this.$refs.wrapper,{
     			bounce:false
     		})
-        var image=localStorage.getItem("photo");
-        if(image){
-          this.initphoto(image)
-        }
+
         var input=this.$refs.input;
         var _this=this;
         input.onchange=function(){
@@ -74,7 +71,7 @@
       }
     },
     computed:{
-      photo(){
+      photo(){  //用计算属性,如果用户上传过头像,那么使用用户的照片,如果没有,那么使用ajax请求的数据.
         var url = localStorage.getItem("photo");
         return url?url:this.user.picture;
       }
