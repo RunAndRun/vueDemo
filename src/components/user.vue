@@ -4,8 +4,9 @@
       <div>
       	<div class="top">
 	        <div class="info">
-		        <img :src="user.picture" class="img">
+		        <img :src="photo" class="img" ref="img">
 		        <span class="name">ID: {{user.name}}</span>
+            <input type="file" class="image" accept="image/*" capture="camera" ref="input"/>
 	        </div>
 	        <p class="sign">签名: {{user.sign}}</p>
 	      </div>
@@ -43,10 +44,40 @@
     	var _this=this;
     	this.$nextTick(()=>{
     		new BScroll(this.$refs.wrapper,{
-    			click:true,
     			bounce:false
     		})
+        var image=localStorage.getItem("photo");
+        if(image){
+          this.initphoto(image)
+        }
+        var input=this.$refs.input;
+        var _this=this;
+        input.onchange=function(){
+          _this.changephoto();
+        }
     	})
+    },
+    methods:{
+      initphoto(){
+        var photo=this.$refs.img;
+        photo.src=arguments[0];
+      },
+      changephoto(){
+        var reader=new FileReader();
+        var input=this.$refs.input;
+        reader.readAsDataURL(input.files[0]);
+        var _this=this;
+        reader.onload=function(){
+          _this.initphoto(reader.result);
+          localStorage.setItem("photo",reader.result);
+        }
+      }
+    },
+    computed:{
+      photo(){
+        var url = localStorage.getItem("photo");
+        return url?url:this.user.picture;
+      }
     }
   }
 </script>
@@ -67,6 +98,7 @@
   			box-sizing:border-box;
   			background: #90c6ef;
   			.info{
+          position:relative;
   				font-size: 0;
   				margin-bottom: 1.0rem;
           .img{
@@ -75,6 +107,16 @@
           	height: 3.0rem;
           	border-radius:50%;
           	margin-right: 1.2rem;
+          }
+          .image{
+            position:absolute;
+            width: 3.0rem;
+            height: 3.0rem;
+            border-radius:50%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            z-index: 20;
           }
           .name{
           	display: inline-block;

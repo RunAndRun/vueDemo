@@ -16,10 +16,10 @@
           <span class="icon icon-video-camera"></span>
           <p class="text">搜索</p>
         </router-link>
-        <a class="items" v-tap="{methods:user}">
+        <router-link :to="url" class="items" v-tap="{methods:user}" ref="link">
           <span class="icon icon-spinner10"></span>
           <p class="text">我的</p>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -31,15 +31,18 @@
     methods:{
       user(){
         if(this.account.length){
-          this.$router.push("/user");
+          this.$router.push("/user")
         }else{
-          this.$router.push("/login");
+          this.$router.push("/login")
         }
       }
     },
     computed:{
       account(){
         return this.$store.state.accounts;
+      },
+      url(){
+        return this.$store.state.accounts.length>0?"/user":"/login"
       }
     }
   }
