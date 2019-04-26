@@ -32,10 +32,13 @@
         this.text=res.data.text;
 			})
 		},
+    mounted() {
+      this.start()
+    },
     methods:{
       start(){
         const start = this.$refs.start;
-        start.style.animation="start 1.2s"
+        start.style.animation="start 3.5s"
         start.addEventListener("animationend",()=>{
           this.$router.push("/news");
         },false)
@@ -67,7 +70,7 @@
       		height: 100%;
       		background:#3f7aab;
       	}
-      }  		
+      }
   	}
   }
   @keyframes start{
